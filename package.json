@@ -2,6 +2,7 @@
   "name": "whisker-watch-server",
   "version": "1.0.0",
   "main": "index.js",
+  "type": "module",
   "scripts": {
     "start": "node --watch index.js",
     "db:migrate": "knex migrate:latest",
