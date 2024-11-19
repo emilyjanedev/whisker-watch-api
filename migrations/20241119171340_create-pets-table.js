@@ -17,8 +17,8 @@ export function up(knex) {
     table.string("pet_type").notNullable();
     table.integer("pet_age").notNullable();
     table.string("description").notNullable();
-    table.decimal("longitude").notNullable();
-    table.decimal("latitude").notNullable();
+    table.float("lng").notNullable();
+    table.float("lat").notNullable();
     table.timestamp("created_at").defaultTo(knex.fn.now());
     table
       .timestamp("updated_at")
