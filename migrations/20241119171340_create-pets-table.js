@@ -15,10 +15,15 @@ export function up(knex) {
     table.string("status").notNullable();
     table.string("pet_name").notNullable();
     table.string("pet_type").notNullable();
-    table.integer("pet_age").notNullable();
-    table.string("description").notNullable();
     table.float("lng").notNullable();
     table.float("lat").notNullable();
+    table.integer("pet_age").notNullable();
+    table.string("description").notNullable();
+    table.string("pet_temperament").notNullable();
+    table.timestamp("missing_since").notNullable();
+    table.string("pet_size").notNullable();
+    table.string("contact_name").notNullable();
+    table.string("contact_email").notNullable();
     table.timestamp("created_at").defaultTo(knex.fn.now());
     table
       .timestamp("updated_at")
