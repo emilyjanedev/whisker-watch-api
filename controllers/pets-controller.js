@@ -26,7 +26,6 @@ const addPet = async (req, res) => {
     contact_email,
   } = req.body;
   const fileData = req.file;
-  console.log(req);
 
   const newPet = {
     user_id: 1,
@@ -38,7 +37,7 @@ const addPet = async (req, res) => {
     lat,
     pet_age,
     pet_temperament,
-    missing_since,
+    missing_since: new Date(missing_since),
     pet_size,
     description,
     contact_name,
