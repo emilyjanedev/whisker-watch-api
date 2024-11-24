@@ -8,4 +8,6 @@ router
   .get(petsController.getPetsList)
   .post(upload.single("pet_image"), petsController.addPet);
 
+router.route("/:id").get(petsController.getPetById);
+
 export default router;

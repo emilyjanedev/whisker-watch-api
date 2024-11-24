@@ -2,12 +2,26 @@ import initKnex from "knex";
 import configuration from "../knexfile.js";
 const knex = initKnex(configuration);
 
-const getPetsList = async (req, res) => {
+const getPetsList = async (_req, res) => {
   try {
     const data = await knex("pets");
     res.status(200).json(data);
   } catch (error) {
     res.status(400).json({ message: `Error retrieving pets list: ${error}` });
+  }
+};
+
+const getPetById = async (req, res) => {
+  try {
+    const pet = await knex("pets").where({ id: req.params.id }).first();
+    if (!pet) {
+      return res
+        .status(400)
+        .json({ message: `Error retrieving pet: ${error}` });
+    }
+    res.status(200).json(pet);
+  } catch (error) {
+    res.status(400).json({ message: `Unable to retrieve pet data: ${error}` });
   }
 };
 
@@ -58,4 +72,4 @@ const addPet = async (req, res) => {
   }
 };
 
-export { getPetsList, addPet };
+export { getPetsList, getPetById, addPet };
