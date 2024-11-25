@@ -38,6 +38,7 @@ const getPetSightings = async (req, res) => {
 
 const addPetSighting = async (req, res) => {
   const newSighting = req.body;
+  newSighting.sighted_at = new Date(newSighting.sighted_at);
 
   try {
     const result = await knex("sightings").insert(newSighting);
