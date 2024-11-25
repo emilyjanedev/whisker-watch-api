@@ -10,6 +10,9 @@ router
 
 router.route("/:id").get(petsController.getPetById);
 
-router.route("/:id/sightings").get(petsController.getPetSightings);
+router
+  .route("/:id/sightings")
+  .get(petsController.getPetSightings)
+  .post(petsController.addPetSighting);
 
 export default router;

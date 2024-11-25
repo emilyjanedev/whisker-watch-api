@@ -36,6 +36,25 @@ const getPetSightings = async (req, res) => {
   }
 };
 
+const addPetSighting = async (req, res) => {
+  const newSighting = req.body;
+
+  try {
+    const result = await knex("sightings").insert(newSighting);
+
+    const newSightingId = result[0];
+    const createdSighting = await knex("sightings").where({
+      id: newSightingId,
+    });
+
+    res.status(201).json(createdSighting[0]);
+  } catch (error) {
+    res.status(500).json({
+      message: `Unable to add new pet sighting: ${error}`,
+    });
+  }
+};
+
 const addPet = async (req, res) => {
   const {
     pet_name,
@@ -83,4 +102,4 @@ const addPet = async (req, res) => {
   }
 };
 
-export { getPetsList, getPetById, getPetSightings, addPet };
+export { getPetsList, getPetById, getPetSightings, addPetSighting, addPet };
