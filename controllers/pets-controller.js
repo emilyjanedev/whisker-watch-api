@@ -25,6 +25,17 @@ const getPetById = async (req, res) => {
   }
 };
 
+const getPetSightings = async (req, res) => {
+  try {
+    const sightings = await knex("sightings").where({ pet_id: req.params.id });
+    res.status(200).json(sightings);
+  } catch (error) {
+    res.status(400).json({
+      message: `Unable to retrieve sightings for pet id ${req.params.id}`,
+    });
+  }
+};
+
 const addPet = async (req, res) => {
   const {
     pet_name,
@@ -72,4 +83,4 @@ const addPet = async (req, res) => {
   }
 };
 
-export { getPetsList, getPetById, addPet };
+export { getPetsList, getPetById, getPetSightings, addPet };
