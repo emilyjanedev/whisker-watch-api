@@ -14,6 +14,7 @@ export function up(knex) {
     table.string("note").notNullable();
     table.float("lng").notNullable();
     table.float("lat").notNullable();
+    table.string("city").notNullable();
     table.timestamp("sighted_at").notNullable();
     table.timestamp("created_at").defaultTo(knex.fn.now());
     table
