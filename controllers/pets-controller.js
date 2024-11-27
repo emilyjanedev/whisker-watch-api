@@ -1,11 +1,16 @@
 import initKnex from "knex";
 import configuration from "../knexfile.js";
+import { offsetMarkers } from "../utils/offsetMarkers.js";
 const knex = initKnex(configuration);
 
 const getPetsList = async (_req, res) => {
   try {
     const data = await knex("pets");
-    res.status(200).json(data);
+    const sortedData = data.sort(
+      (a, b) => new Date(b.created_at) - new Date(a.created_at)
+    );
+    const locationOffsetData = offsetMarkers(sortedData);
+    res.status(200).json(locationOffsetData);
   } catch (error) {
     res.status(400).json({ message: `Error retrieving pets list: ${error}` });
   }
@@ -27,8 +32,11 @@ const getPetById = async (req, res) => {
 
 const getPetSightings = async (req, res) => {
   try {
-    const sightings = await knex("sightings").where({ pet_id: req.params.id });
-    res.status(200).json(sightings);
+    const data = await knex("sightings").where({ pet_id: req.params.id });
+    const sortedData = data.sort(
+      (a, b) => new Date(b.created_at) - new Date(a.created_at)
+    );
+    res.status(200).json(sortedData);
   } catch (error) {
     res.status(400).json({
       message: `Unable to retrieve sightings for pet id ${req.params.id}`,
