@@ -3,9 +3,20 @@ import configuration from "../knexfile.js";
 import { offsetMarkers } from "../utils/offsetMarkers.js";
 const knex = initKnex(configuration);
 
-const getPetsList = async (_req, res) => {
+const getPetsList = async (req, res) => {
+  const { user_id } = req.query;
+
   try {
-    const data = await knex("pets");
+    let data;
+
+    if (user_id) {
+      const response = await knex("pets").where({ user_id: user_id });
+      data = response;
+    } else {
+      const response = await knex("pets");
+      data = response;
+    }
+
     const sortedData = data.sort(
       (a, b) => new Date(b.created_at) - new Date(a.created_at)
     );
