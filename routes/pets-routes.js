@@ -8,7 +8,10 @@ router
   .get(petsController.getPetsList)
   .post(upload.single("pet_image"), petsController.addPet);
 
-router.route("/:id").get(petsController.getPetById);
+router
+  .route("/:id")
+  .get(petsController.getPetById)
+  .delete(petsController.deletePet);
 
 router
   .route("/:id/sightings")

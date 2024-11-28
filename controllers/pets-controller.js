@@ -124,4 +124,28 @@ const addPet = async (req, res) => {
   }
 };
 
-export { getPetsList, getPetById, getPetSightings, addPetSighting, addPet };
+const deletePet = async (req, res) => {
+  const petId = req.params.id;
+
+  try {
+    const rowsDeleted = await knex("pets").where({ id: petId }).delete();
+
+    if (rowsDeleted === 0) {
+      res.status(400).json({ message: `Pet with id ${petId} not found.` });
+    }
+
+    res.status(204).send();
+  } catch (error) {
+    console.error("Error deleting pet:", error);
+    res.status(500).json({ message: `An error occurred: ${error.message}` });
+  }
+};
+
+export {
+  getPetsList,
+  getPetById,
+  getPetSightings,
+  addPetSighting,
+  addPet,
+  deletePet,
+};
