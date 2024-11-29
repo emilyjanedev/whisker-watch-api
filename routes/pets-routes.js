@@ -11,7 +11,7 @@ router
 router
   .route("/:id")
   .get(petsController.getPetById)
-  .put(petsController.updatePet)
+  .put(upload.single("pet_image"), petsController.updatePet)
   .delete(petsController.deletePet);
 
 router

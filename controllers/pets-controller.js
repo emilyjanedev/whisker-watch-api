@@ -102,6 +102,7 @@ const addPet = async (req, res) => {
     lat,
     lng,
     city,
+    address,
     pet_age,
     description,
     pet_temperament,
@@ -121,6 +122,7 @@ const addPet = async (req, res) => {
     lng,
     lat,
     city,
+    address,
     pet_age,
     pet_temperament,
     missing_since: new Date(missing_since),
@@ -167,18 +169,27 @@ const updatePet = async (req, res) => {
     return res.status(400).json({ message: message });
   }
 
-  try {
-    const { id, ...updateData } = req.body;
-    updateData.updated_at = new Date();
-    updateData.missing_since = new Date(updateData.missing_since);
+  const petUpdateData = req.body;
+  const fileData = req.file;
 
-    const rowsUpdated = await knex("pets").where({ id: id }).update(updateData);
+  (petUpdateData.pet_image = fileData
+    ? `http://localhost:8080/images/${fileData.filename}`
+    : petUpdateData.pet_image),
+    (petUpdateData.status = "lost");
+  petUpdateData.missing_since = new Date(petUpdateData.missing_since);
+
+  try {
+    const { id: petId } = req.params;
+
+    const rowsUpdated = await knex("pets")
+      .where({ id: petId })
+      .update(petUpdateData);
 
     if (rowsUpdated === 0) {
-      res.status(400).json({ message: `Pet with id ${id} was not found.` });
+      res.status(400).json({ message: `Pet with id ${petId} was not found.` });
     }
 
-    const updatedPet = await knex("pets").where({ id: id });
+    const updatedPet = await knex("pets").where({ id: petId }).first();
     res.status(200).json(updatedPet);
   } catch (error) {
     res.status(500).json({ message: `Unable to update pet ${error}` });

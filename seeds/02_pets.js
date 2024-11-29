@@ -15,6 +15,7 @@ export async function seed(knex) {
       lng: -123.12,
       lat: 49.28,
       city: "Vancouver",
+      address: "777 Richards Street, Vancouver, BC, Canada",
       pet_age: 4,
       description:
         "Cheeto somehow wandered out of my apartment, into the elevator, and onto the street! Have you seen him?",
@@ -35,6 +36,7 @@ export async function seed(knex) {
       lng: -122.95,
       lat: 49.33,
       city: "North Vancouver",
+      address: "Deep Cove, North Vancouver, BC, Canada",
       pet_age: 6,
       description:
         "Beans got out of his harness on our walk last night. He is a friendly little guy!",
@@ -50,10 +52,12 @@ export async function seed(knex) {
       pet_image: "http://localhost:8080/images/images.jpeg",
       status: "lost",
       pet_name: "Sushi",
+      address: "1213 Russell Avenue, North Vancouver, BC, Canada",
       pet_type: "Cat",
       lng: -122.95,
       lat: 49.31,
       city: "North Vancouver",
+
       pet_age: 3,
       description:
         "Sushi decided to dart out the door to chase a squirrel and I haven't seen him since! He is shy, but friendly!",
@@ -74,6 +78,7 @@ export async function seed(knex) {
       lng: -122.96,
       lat: 49.32,
       city: "North Vancouver",
+      address: "726 Baycrest Drive, North Vancouver, BC, Canada",
       pet_age: 5,
       description:
         "Monkey got out last night! He is very friendly and will probably approach you before you approach him.",
