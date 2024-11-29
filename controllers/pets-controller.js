@@ -44,7 +44,18 @@ const getPetById = async (req, res) => {
 
 const getPetSightings = async (req, res) => {
   try {
-    const data = await knex("sightings").where({ pet_id: req.params.id });
+    const data = await knex("sightings")
+      .join("users", "users.id", "sightings.user_id")
+      .select(
+        "sightings.id",
+        "users.user_name",
+        "sightings.note",
+        "sightings.sighted_at",
+        "sightings.city",
+        "sightings.lat",
+        "sightings.lng"
+      )
+      .where({ pet_id: req.params.id });
     const sortedData = data.sort(
       (a, b) => new Date(b.created_at) - new Date(a.created_at)
     );
