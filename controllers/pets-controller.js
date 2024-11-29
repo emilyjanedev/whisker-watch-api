@@ -1,6 +1,7 @@
 import initKnex from "knex";
 import configuration from "../knexfile.js";
 import { offsetMarkers } from "../utils/offsetMarkers.js";
+import { validateRequest } from "../utils/validateRequest.js";
 const knex = initKnex(configuration);
 
 const getPetsList = async (req, res) => {
@@ -76,6 +77,11 @@ const addPetSighting = async (req, res) => {
 };
 
 const addPet = async (req, res) => {
+  const { result, message } = validateRequest(req.body);
+  if (!result) {
+    return res.status(400).json({ message: message });
+  }
+
   const {
     pet_name,
     pet_type,
@@ -141,6 +147,30 @@ const deletePet = async (req, res) => {
   }
 };
 
+const updatePet = async (req, res) => {
+  const { result, message } = validateRequest(req.body);
+  if (!result) {
+    return res.status(400).json({ message: message });
+  }
+
+  try {
+    const { id, ...updateData } = req.body;
+    updateData.updated_at = new Date();
+    updateData.missing_since = new Date(updateData.missing_since);
+
+    const rowsUpdated = await knex("pets").where({ id: id }).update(updateData);
+
+    if (rowsUpdated === 0) {
+      res.status(400).json({ message: `Pet with id ${id} was not found.` });
+    }
+
+    const updatedPet = await knex("pets").where({ id: id });
+    res.status(200).json(updatedPet);
+  } catch (error) {
+    res.status(500).json({ message: `Unable to update pet ${error}` });
+  }
+};
+
 export {
   getPetsList,
   getPetById,
@@ -148,4 +178,5 @@ export {
   addPetSighting,
   addPet,
   deletePet,
+  updatePet,
 };

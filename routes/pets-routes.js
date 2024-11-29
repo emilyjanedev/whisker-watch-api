@@ -11,6 +11,7 @@ router
 router
   .route("/:id")
   .get(petsController.getPetById)
+  .put(petsController.updatePet)
   .delete(petsController.deletePet);
 
 router
