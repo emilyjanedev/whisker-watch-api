@@ -31,4 +31,15 @@ const addUser = async (req, res) => {
   }
 };
 
-export { getUsersList, addUser };
+const getUserSightings = async (req, res) => {
+  const { id } = req.params;
+
+  try {
+    const userSightings = await knex("sightings").where({ user_id: id });
+    res.status(200).json(userSightings);
+  } catch (error) {
+    res.status(500).json({ message: `Unable to get user sightings: ${error}` });
+  }
+};
+
+export { getUsersList, addUser, getUserSightings };
