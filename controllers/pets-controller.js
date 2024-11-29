@@ -64,11 +64,13 @@ const addPetSighting = async (req, res) => {
     const result = await knex("sightings").insert(newSighting);
 
     const newSightingId = result[0];
-    const createdSighting = await knex("sightings").where({
-      id: newSightingId,
-    });
+    const createdSighting = await knex("sightings")
+      .where({
+        id: newSightingId,
+      })
+      .first();
 
-    res.status(201).json(createdSighting[0]);
+    res.status(201).json(createdSighting);
   } catch (error) {
     res.status(500).json({
       message: `Unable to add new pet sighting: ${error}`,
