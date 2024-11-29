@@ -83,6 +83,7 @@ const addPet = async (req, res) => {
   }
 
   const {
+    user_id,
     pet_name,
     pet_type,
     lat,
@@ -99,7 +100,7 @@ const addPet = async (req, res) => {
   const fileData = req.file;
 
   const newPet = {
-    user_id: 1,
+    user_id,
     pet_image: `http://localhost:8080/images/${fileData.filename}`,
     status: "lost",
     pet_name,
@@ -120,9 +121,9 @@ const addPet = async (req, res) => {
     const result = await knex("pets").insert(newPet);
 
     const newPetId = result[0];
-    const createdPet = await knex("pets").where({ id: newPetId });
+    const createdPet = await knex("pets").where({ id: newPetId }).first();
 
-    res.status(201).json(createdPet[0]);
+    res.status(201).json(createdPet);
   } catch (error) {
     res.status(500).json({
       message: `Unable to add new pet: ${error}`,

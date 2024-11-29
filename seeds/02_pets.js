@@ -6,7 +6,7 @@ export async function seed(knex) {
   await knex("pets").del();
   await knex("pets").insert([
     {
-      user_id: 1,
+      user_id: "f62c9e3b-6a24-4f6b-93f5-a60d3c39eeb1",
       pet_image: "https://example.com/images/pet6.jpg",
       status: "lost",
       pet_name: "Rocky",
@@ -23,7 +23,7 @@ export async function seed(knex) {
       contact_email: "carlosg@example.com",
     },
     {
-      user_id: 1,
+      user_id: "f62c9e3b-6a24-4f6b-93f5-a60d3c39eeb1",
       pet_image: "https://example.com/images/pet7.jpg",
       status: "lost",
       pet_name: "Luna",
@@ -40,9 +40,9 @@ export async function seed(knex) {
       contact_email: "sarahlee@example.com",
     },
     {
-      user_id: 1,
+      user_id: "f62c9e3b-6a24-4f6b-93f5-a60d3c39eeb1",
       pet_image: "https://example.com/images/pet8.jpg",
-      status: "found",
+      status: "lost",
       pet_name: "Max",
       pet_type: "Dog",
       lng: -123.121,
@@ -57,7 +57,7 @@ export async function seed(knex) {
       contact_email: "davidkim@example.com",
     },
     {
-      user_id: 1,
+      user_id: "f62c9e3b-6a24-4f6b-93f5-a60d3c39eeb1",
       pet_image: "https://example.com/images/pet9.jpg",
       status: "lost",
       pet_name: "Bella",
@@ -75,9 +75,9 @@ export async function seed(knex) {
       contact_email: "emmaturner@example.com",
     },
     {
-      user_id: 1,
+      user_id: "f62c9e3b-6a24-4f6b-93f5-a60d3c39eeb1",
       pet_image: "https://example.com/images/pet10.jpg",
-      status: "found",
+      status: "lost",
       pet_name: "Oliver",
       pet_type: "Dog",
       lng: -123.0645,

@@ -11,6 +11,11 @@ export function up(knex) {
       .references("pets.id")
       .onUpdate("CASCADE")
       .onDelete("CASCADE");
+    table
+      .string("user_id")
+      .references("users.id")
+      .onUpdate("CASCADE")
+      .onDelete("CASCADE");
     table.string("note").notNullable();
     table.float("lng").notNullable();
     table.float("lat").notNullable();

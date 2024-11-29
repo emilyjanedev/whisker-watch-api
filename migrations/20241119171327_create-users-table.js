@@ -4,7 +4,7 @@
  */
 export function up(knex) {
   return knex.schema.createTable("users", (table) => {
-    table.increments("id").primary();
+    table.string("id").primary();
     table.string("user_name").notNullable();
     table.string("user_email").notNullable();
     table.timestamp("created_at").defaultTo(knex.fn.now());

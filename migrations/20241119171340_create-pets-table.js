@@ -6,8 +6,7 @@ export function up(knex) {
   return knex.schema.createTable("pets", (table) => {
     table.increments("id").primary();
     table
-      .integer("user_id")
-      .unsigned()
+      .string("user_id")
       .references("users.id")
       .onUpdate("CASCADE")
       .onDelete("CASCADE");
