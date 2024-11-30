@@ -148,23 +148,6 @@ const addPet = async (req, res) => {
   }
 };
 
-const deletePet = async (req, res) => {
-  const petId = req.params.id;
-
-  try {
-    const rowsDeleted = await knex("pets").where({ id: petId }).delete();
-
-    if (rowsDeleted === 0) {
-      res.status(400).json({ message: `Pet with id ${petId} not found.` });
-    }
-
-    res.status(204).send();
-  } catch (error) {
-    console.error("Error deleting pet:", error);
-    res.status(500).json({ message: `An error occurred: ${error.message}` });
-  }
-};
-
 const updatePet = async (req, res) => {
   const { result, message } = validateRequest(req.body);
   if (!result) {
@@ -174,10 +157,10 @@ const updatePet = async (req, res) => {
   const petUpdateData = req.body;
   const fileData = req.file;
 
-  (petUpdateData.pet_image = fileData
-    ? `http://localhost:8080/images/${fileData.filename}`
-    : petUpdateData.pet_image),
-    (petUpdateData.status = "lost");
+  petUpdateData.pet_image = fileData
+    ? await uploadImage(fileData)
+    : petUpdateData.pet_image;
+  petUpdateData.status = "lost";
   petUpdateData.missing_since = new Date(petUpdateData.missing_since);
 
   try {
@@ -195,6 +178,23 @@ const updatePet = async (req, res) => {
     res.status(200).json(updatedPet);
   } catch (error) {
     res.status(500).json({ message: `Unable to update pet ${error}` });
+  }
+};
+
+const deletePet = async (req, res) => {
+  const petId = req.params.id;
+
+  try {
+    const rowsDeleted = await knex("pets").where({ id: petId }).delete();
+
+    if (rowsDeleted === 0) {
+      res.status(400).json({ message: `Pet with id ${petId} not found.` });
+    }
+
+    res.status(204).send();
+  } catch (error) {
+    console.error("Error deleting pet:", error);
+    res.status(500).json({ message: `An error occurred: ${error.message}` });
   }
 };
 
