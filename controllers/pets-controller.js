@@ -2,6 +2,7 @@ import initKnex from "knex";
 import configuration from "../knexfile.js";
 import { offsetMarkers } from "../utils/offsetMarkers.js";
 import { validateRequest } from "../utils/validateRequest.js";
+import { uploadImage } from "./upload-file-controller.js";
 const knex = initKnex(configuration);
 
 const getPetsList = async (req, res) => {
@@ -112,10 +113,11 @@ const addPet = async (req, res) => {
     contact_email,
   } = req.body;
   const fileData = req.file;
+  const uploadedPetImage = await uploadImage(fileData);
 
   const newPet = {
     user_id,
-    pet_image: `http://localhost:8080/images/${fileData.filename}`,
+    pet_image: uploadedPetImage,
     status: "lost",
     pet_name,
     pet_type,

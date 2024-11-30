@@ -1,7 +1,10 @@
 import "dotenv/config";
 import e from "express";
 import cors from "cors";
+import { initializeApp } from "firebase/app";
+import { firebaseConfig } from "./config/firebase.js";
 const app = e();
+initializeApp(firebaseConfig);
 
 const PORT = process.env.PORT || 5050;
 
