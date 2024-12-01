@@ -36,7 +36,10 @@ const getUserSightings = async (req, res) => {
 
   try {
     const userSightings = await knex("sightings").where({ user_id: id });
-    res.status(200).json(userSightings);
+    const sortedData = userSightings.sort(
+      (a, b) => new Date(b.created_at) - new Date(a.created_at)
+    );
+    res.status(200).json(sortedData);
   } catch (error) {
     res.status(500).json({ message: `Unable to get user sightings: ${error}` });
   }

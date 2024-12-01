@@ -58,7 +58,7 @@ const getPetSightings = async (req, res) => {
       )
       .where({ pet_id: req.params.id });
     const sortedData = data.sort(
-      (a, b) => new Date(b.created_at) - new Date(a.created_at)
+      (a, b) => new Date(b.sighted_at) - new Date(a.sighted_at)
     );
     res.status(200).json(sortedData);
   } catch (error) {
