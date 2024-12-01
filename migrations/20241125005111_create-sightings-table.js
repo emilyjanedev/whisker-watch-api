@@ -17,8 +17,8 @@ export function up(knex) {
       .onUpdate("CASCADE")
       .onDelete("CASCADE");
     table.string("note").notNullable();
-    table.float("lng").notNullable();
-    table.float("lat").notNullable();
+    table.double("lng").notNullable();
+    table.double("lat").notNullable();
     table.string("city").notNullable();
     table.timestamp("sighted_at").notNullable();
     table.timestamp("created_at").defaultTo(knex.fn.now());

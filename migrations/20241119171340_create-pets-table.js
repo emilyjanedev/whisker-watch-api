@@ -14,8 +14,8 @@ export function up(knex) {
     table.string("status").notNullable();
     table.string("pet_name").notNullable();
     table.string("pet_type").notNullable();
-    table.float("lng").notNullable();
-    table.float("lat").notNullable();
+    table.double("lng").notNullable();
+    table.double("lat").notNullable();
     table.string("city").notNullable();
     table.string("address").notNullable();
     table.integer("pet_age").notNullable();
