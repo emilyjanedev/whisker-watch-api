@@ -8,6 +8,8 @@ router
   .get(usersController.getUsersList)
   .post(usersController.addUser);
 
+router.route("/:id").get(usersController.getUserById);
+
 router.route("/:id/sightings").get(usersController.getUserSightings);
 
 export default router;

@@ -12,6 +12,16 @@ const getUsersList = async (_req, res) => {
   }
 };
 
+const getUserById = async (req, res) => {
+  const { id: userId } = req.params;
+  try {
+    const user = await knex("users").where({ id: userId }).first();
+    res.status(200).json(user);
+  } catch (error) {
+    res.status(500).json({ message: `Could not get user wth id ${userId}.` });
+  }
+};
+
 const addUser = async (req, res) => {
   const { result, message } = validateRequest(req.body);
   if (!result) {
@@ -45,4 +55,4 @@ const getUserSightings = async (req, res) => {
   }
 };
 
-export { getUsersList, addUser, getUserSightings };
+export { getUsersList, getUserById, addUser, getUserSightings };
