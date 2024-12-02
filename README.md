@@ -196,7 +196,8 @@ Response:
 **DELETE /pets/:id**
 
 - Delete an existing pet
-  Parameters:
+
+Parameters:
 
 - id: number representing the id of the pet
 
@@ -345,12 +346,13 @@ Parameters:
 
 Request Body:
 
-````json
+```json
 {
   "id": "2aOKwRsZmjXwDBkc9j4cmQUTAy02",
   "user_name": "Zak",
   "user_email": "zak@gmail.com"
 }
+```
 
 Response:
 
@@ -362,12 +364,13 @@ Response:
   "created_at": "2024-12-02T03:37:56.000Z",
   "updated_at": "2024-12-02T03:37:56.000Z"
 }
-````
+```
 
 **GET /users/:id/sightings**
 
 - Get a list of sightings that a specific user has reported
-  Parameters:
+
+Parameters:
 
 - id: string representing the id of the user
 
