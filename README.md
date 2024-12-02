@@ -232,7 +232,7 @@ Response:
 
 **POST /pets/:id/sightings**
 
-- Add a listing for a specific pet
+- Add a sighting for a specific pet
 
 Parameters:
 
