@@ -2,6 +2,7 @@
   "name": "whisker-watch-server",
   "version": "1.0.0",
   "main": "index.js",
+  "type": "module",
   "scripts": {
     "start": "node --watch index.js",
     "db:migrate": "knex migrate:latest",
@@ -15,7 +16,10 @@
     "cors": "^2.8.5",
     "dotenv": "^16.4.5",
     "express": "^4.21.1",
+    "firebase": "^11.0.2",
     "knex": "^3.1.0",
-    "mysql2": "^3.11.4"
+    "multer": "^1.4.5-lts.1",
+    "mysql2": "^3.11.4",
+    "uuid": "^11.0.3"
   }
 }
